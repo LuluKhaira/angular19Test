@@ -1,33 +1,24 @@
-import { Component, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  myForm = new FormGroup({
+    userName: new FormControl(''),
+    password: new FormControl('')
+  });
 
-  // userForm : FormGroup = new FormGroup({
-  //   userName : new FormControl(""),
-  //   passwowrd : new FormControl("")
-  // })
+  constructor(private router: Router) {}
 
-  userName: FormControl = new FormControl("");
-  
-  password: FormControl = new FormControl("");
-
-  router = inject(Router);
- 
   onLogin() {
-    debugger;
-    if (this.userName.value == "admin" && this.password.value == "") {
-      this.router.navigateByUrl("dashboard")
-    } else {
-      alert("wrong ap")
-    }
+    console.log(this.myForm.value);
   }
 }
