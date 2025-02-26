@@ -1,16 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  myForm = new FormGroup({
+    userName: new FormControl(''),
+    password: new FormControl('')
+  });
 
-  ngOnInit() {
-    console.log("LoginComponent dimuat");
+  constructor(private router: Router) {}
+
+  onLogin() {
+    console.log(this.myForm.value);
   }
-
 }
