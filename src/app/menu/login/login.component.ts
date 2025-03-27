@@ -1,7 +1,7 @@
-// login.component.ts
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,14 +12,14 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  
-  constructor(private fb: FormBuilder) {
+
+  constructor(private fb: FormBuilder, private router: Router) { // Tambahkan Router di sini
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }
-  
+
   onSubmit() {
     if (this.loginForm.valid) {
       console.log('Form submitted successfully', this.loginForm.value);
@@ -29,14 +29,14 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
     }
   }
-  
+
   forgotPassword() {
     console.log('Forgot password clicked');
     // Add your forgot password logic here
   }
-  
-  signup() {
+
+  goToSignup() {
     console.log('Signup clicked');
-    // Add your signup navigation logic here
+    this.router.navigate(['/signup']); // Pastikan ini bisa dijalankan
   }
 }
